@@ -1,0 +1,526 @@
+<title>VMenus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   La paleta es la del propio producto (el panel y la carta ya la
+   usan). Dark-first, igual que ellos: :root es la vista oscura y la
+   clara se redefine encima.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --bg: #080f0a;
+  --surface: #0d150f;
+  --panel: #111a13;
+  --card: #172019;
+  --border: #1e2e21;
+  --border2: #2a3f2d;
+  --accent: #3dd68c;
+  --accent-dim: rgba(61,214,140,0.10);
+  --accent-glow: rgba(61,214,140,0.22);
+  --warn: #ffa502;
+  --warn-dim: rgba(255,165,2,0.12);
+  --text: #ddeee2;
+  --text-muted: #a8bfb0;
+  --text-dim: #7a9182;
+  --on-accent: #080f0a;
+  --punteado: #2a3f2d;
+
+  --display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
+  --radius: 8px;
+  --r-lg: 14px;
+  --medida: 62ch;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f2f6f3;
+    --surface: #ffffff;
+    --panel: #ffffff;
+    --card: #eef3ef;
+    --border: #dae3dc;
+    --border2: #b9c9bc;
+    --accent: #0b8850;
+    --accent-dim: rgba(11,136,80,0.10);
+    --accent-glow: rgba(11,136,80,0.18);
+    --warn: #96590a;
+    --warn-dim: rgba(150,89,10,0.12);
+    --text: #142017;
+    --text-muted: #4a5c4e;
+    --text-dim: #5d6b60;
+    --on-accent: #ffffff;
+    --punteado: #b9c9bc;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f2f6f3;
+  --surface: #ffffff;
+  --panel: #ffffff;
+  --card: #eef3ef;
+  --border: #dae3dc;
+  --border2: #b9c9bc;
+  --accent: #0b8850;
+  --accent-dim: rgba(11,136,80,0.10);
+  --accent-glow: rgba(11,136,80,0.18);
+  --warn: #96590a;
+  --warn-dim: rgba(150,89,10,0.12);
+  --text: #142017;
+  --text-muted: #4a5c4e;
+  --text-dim: #5d6b60;
+  --on-accent: #ffffff;
+  --punteado: #b9c9bc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.envoltura { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+/* ── BORRADOR ─────────────────────────────────────────────── */
+/* Se quita esta franja entera cuando estén el número y los precios. */
+.borrador {
+  background: var(--warn-dim);
+  border-bottom: 1px solid var(--warn);
+  color: var(--warn);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 9px 24px;
+  text-align: center;
+}
+
+/* ── TIPOGRAFÍA ───────────────────────────────────────────── */
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.06; }
+h1 { font-size: clamp(2.5rem, 5.6vw, 4rem); font-weight: 800; letter-spacing: -0.035em; }
+h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; }
+h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+p  { margin: 0; max-width: var(--medida); }
+
+/* El rótulo de sección: en una carta impresa es el nombre del curso. */
+.curso {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.curso::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+section { padding: clamp(56px, 9vw, 96px) 0; }
+section + section { border-top: 1px solid var(--border); }
+
+.pila { display: flex; flex-direction: column; gap: 26px; }
+.pila-corta { display: flex; flex-direction: column; gap: 14px; }
+
+/* ── LA FILA DE CARTA ─────────────────────────────────────── */
+/* El punteado que une el plato con su precio. Es el gesto tipográfico
+   de una carta impresa, y aquí es lo que estructura la página. */
+.fila { display: flex; align-items: baseline; gap: 12px; padding: 9px 0; }
+.fila + .fila { border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent); }
+.fila-nombre { font-weight: 500; }
+.fila-guia { flex: 1; border-bottom: 1px dotted var(--punteado); transform: translateY(-4px); min-width: 22px; }
+.fila-valor {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.fila-valor.acento { color: var(--accent); }
+.fila-nota { font-size: 13px; color: var(--text-dim); max-width: var(--medida); margin-top: -4px; padding-bottom: 6px; }
+
+/* ── PORTADA ──────────────────────────────────────────────── */
+.portada { padding-top: clamp(48px, 8vw, 80px); }
+.marca {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.entrada { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--text-muted); max-width: 54ch; }
+.entrada strong { color: var(--text); font-weight: 500; }
+
+.acciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.boton {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--accent); color: var(--on-accent);
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 14px 22px; border-radius: var(--radius);
+  text-decoration: none; border: 1px solid var(--accent);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.boton:hover { transform: translateY(-1px); box-shadow: 0 6px 22px var(--accent-glow); }
+.boton.secundario { background: transparent; color: var(--text); border-color: var(--border2); }
+.boton.secundario:hover { border-color: var(--accent); color: var(--accent); box-shadow: none; }
+a:focus-visible, .boton:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* La muestra de carta de la portada. */
+.muestra {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 22px 24px 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.20);
+}
+.muestra-cabeza {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; margin-bottom: 10px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.muestra-titulo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--text-dim); }
+.muestra-url { font-family: var(--mono); font-size: 11px; color: var(--accent); word-break: break-all; }
+.muestra .fila-valor { color: var(--text); }
+
+.doble { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
+@media (max-width: 780px) { .doble { grid-template-columns: 1fr; } }
+
+/* ── CIFRAS ───────────────────────────────────────────────── */
+.cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+@media (max-width: 620px) { .cifras { grid-template-columns: 1fr; } }
+.cifra { background: var(--surface); padding: 20px 22px; display: flex; flex-direction: column; gap: 4px; }
+.cifra-n { font-family: var(--display); font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.cifra-t { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ── PASOS ────────────────────────────────────────────────── */
+/* Numerados porque de verdad es una secuencia: sin el primero no hay
+   segundo. */
+.pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; counter-reset: paso; }
+@media (max-width: 780px) { .pasos { grid-template-columns: 1fr; } }
+.paso { display: flex; flex-direction: column; gap: 8px; counter-increment: paso; }
+.paso::before {
+  content: counter(paso, decimal-leading-zero);
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; color: var(--accent);
+}
+.paso p { font-size: 14.5px; color: var(--text-muted); }
+
+/* ── PLANES ───────────────────────────────────────────────── */
+.planes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 900px) { .planes { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .planes { grid-template-columns: 1fr; } }
+.plan {
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 20px; background: var(--surface);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.plan.destacado { border-color: var(--accent); background: var(--accent-dim); }
+.plan-nombre { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.plan-que { font-size: 14px; color: var(--text-muted); }
+.plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
+.plan li { display: flex; gap: 8px; align-items: baseline; color: var(--text-muted); }
+.plan li::before { content: "·"; color: var(--accent); font-weight: 700; }
+.plan li.no { color: var(--text-dim); }
+.plan li.no::before { content: "·"; color: var(--border2); }
+
+/* ── PIE ──────────────────────────────────────────────────── */
+footer { border-top: 1px solid var(--border); padding: 40px 0 56px; }
+.pie { display: flex; flex-wrap: wrap; gap: 18px 32px; justify-content: space-between; align-items: baseline; }
+.pie a { color: var(--accent); text-decoration: none; }
+.pie a:hover { text-decoration: underline; }
+.pie-nota { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+
+<div class="borrador">
+  Borrador — falta poner el número de WhatsApp y decidir los precios antes de publicar
+</div>
+
+<!-- ══ PORTADA ══ -->
+<section class="portada">
+  <div class="envoltura doble">
+    <div class="pila">
+      <div class="marca">VMenus</div>
+      <h1>Tu carta, en el teléfono del comensal.</h1>
+      <p class="entrada">
+        Un código QR en la mesa abre tu carta con fotos, precios al día y
+        <strong>video de los platos</strong>. Se actualiza desde un panel, en
+        segundos, y sin volver a imprimir nada.
+      </p>
+      <div class="acciones">
+        <a class="boton" href="https://wa.me/57XXXXXXXXXX?text=Hola%2C%20quiero%20la%20carta%20digital%20para%20mi%20restaurante">Hablemos por WhatsApp</a>
+        <a class="boton secundario" href="https://menu.vmenus.co/bonzas">Ver una carta de verdad</a>
+      </div>
+    </div>
+
+    <div class="muestra" aria-label="Ejemplo de una carta">
+      <div class="muestra-cabeza">
+        <span class="muestra-titulo">Patacones</span>
+        <span class="muestra-url">menu.vmenus.co</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Patacón santandereano</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">$ 10.000</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Patacón mixto</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">$ 17.000</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Patacón pollo champiñón</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">$ 17.000</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Patacón arrecho</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">$ 22.000</span>
+      </div>
+      <p class="fila-nota" style="margin-top:12px">
+        Cada restaurante tiene su dirección: <code>menu.vmenus.co/tunombre</code>
+        y también <code>tunombre.vmenus.co</code>. Las dos funcionan siempre, así
+        que un QR repartido no se queda muerto.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CIFRAS ══ -->
+<section>
+  <div class="envoltura pila">
+    <div class="curso">Dónde está hoy</div>
+    <div class="cifras">
+      <div class="cifra">
+        <span class="cifra-n">9</span>
+        <span class="cifra-t">restaurantes con su carta publicada</span>
+      </div>
+      <div class="cifra">
+        <span class="cifra-n">30 KB</span>
+        <span class="cifra-t">lo que pesa abrir la carta</span>
+      </div>
+      <div class="cifra">
+        <span class="cifra-n">2 años</span>
+        <span class="cifra-t">haciendo marketing para restaurantes</span>
+      </div>
+    </div>
+    <p style="color:var(--text-muted)">
+      La carta abre en el navegador que el comensal ya tiene. Nada que instalar,
+      nada que registrar, y funciona igual con la señal del local llena de gente.
+    </p>
+  </div>
+</section>
+
+<!-- ══ QUÉ INCLUYE ══ -->
+<section>
+  <div class="envoltura pila">
+    <div class="curso">Lo que trae</div>
+    <h2>Una carta que hace cosas que el papel no puede.</h2>
+
+    <div style="margin-top:8px">
+      <div class="fila">
+        <span class="fila-nombre">Fotos de cada plato</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor acento">incluido</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Video del plato en vez de foto</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">plan Video</span>
+      </div>
+      <p class="fila-nota">Se graba, o se genera con IA a partir de una foto que ya tengas.</p>
+
+      <div class="fila">
+        <span class="fila-nombre">Pedidos desde la mesa</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">plan Pedidos</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Promociones que salen al abrir la carta</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor acento">incluido</span>
+      </div>
+      <p class="fila-nota">Y programadas: el dos por uno de los martes sale solo los martes.</p>
+
+      <div class="fila">
+        <span class="fila-nombre">Cartelera para el televisor del local</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">plan Completo</span>
+      </div>
+      <p class="fila-nota">Una página que va pasando tus platos sola. Se deja abierta y ya.</p>
+
+      <div class="fila">
+        <span class="fila-nombre">Horarios por sección</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">plan Pedidos</span>
+      </div>
+      <p class="fila-nota">Los desayunos aparecen a las 7 y se van a las 11, sin que nadie toque nada.</p>
+
+      <div class="fila">
+        <span class="fila-nombre">Qué miran tus comensales</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">plan Pedidos</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Tu QR, diseñado con tus colores</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor">plan Pedidos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IMPORTAR ══ -->
+<section>
+  <div class="envoltura doble">
+    <div class="pila">
+      <div class="curso">Novedad</div>
+      <h2>Sube el PDF de tu carta y se llena sola.</h2>
+      <p style="color:var(--text-muted)">
+        Montar una carta a mano son entre cuarenta y ciento setenta fichas, y ahí
+        es donde la gente lo deja. Ahora se sube el PDF —o una foto— y se sacan
+        los nombres, las descripciones, los precios y las categorías.
+      </p>
+      <p style="color:var(--text-muted)">
+        Antes de crear nada se revisa en pantalla, se corrige lo que haga falta y
+        se quita lo que sobre. <strong style="color:var(--text);font-weight:500">Nada
+        entra en tu carta sin que tú lo apruebes.</strong>
+      </p>
+    </div>
+    <div class="muestra">
+      <div class="muestra-cabeza">
+        <span class="muestra-titulo">Primera carta importada</span>
+        <span class="muestra-url">medido</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Platos leídos del PDF</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor acento">98</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Categorías</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor acento">19</span>
+      </div>
+      <div class="fila">
+        <span class="fila-nombre">Páginas del PDF</span>
+        <span class="fila-guia"></span>
+        <span class="fila-valor acento">9</span>
+      </div>
+      <p class="fila-nota" style="margin-top:12px">
+        Las fotos de los platos no se importan: esas se suben aparte, como
+        siempre.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CÓMO ══ -->
+<section>
+  <div class="envoltura pila">
+    <div class="curso">Cómo empieza</div>
+    <div class="pasos">
+      <div class="paso">
+        <h3>Nos pasas tu carta</h3>
+        <p>En PDF, en foto o como la tengas. La montamos contigo y te damos el acceso al panel.</p>
+      </div>
+      <div class="paso">
+        <h3>Pegas el QR en la mesa</h3>
+        <p>Con tus colores y tu logo. Ese código no cambia nunca, aunque cambies la carta entera.</p>
+      </div>
+      <div class="paso">
+        <h3>La cambias cuando quieras</h3>
+        <p>Subir un precio, agotar un plato, poner la promo del fin de semana. Se ve al instante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PLANES ══ -->
+<section>
+  <div class="envoltura pila">
+    <div class="curso">Planes</div>
+    <h2>Cuatro, según lo que necesites.</h2>
+    <div class="planes">
+      <div class="plan">
+        <div class="plan-nombre">Vitrina</div>
+        <div class="plan-que">Tu carta con fotos, y ya.</div>
+        <ul>
+          <li>Carta con fotos</li>
+          <li>Promociones</li>
+          <li class="no">Sin pedidos</li>
+          <li class="no">Sin estadísticas</li>
+        </ul>
+      </div>
+      <div class="plan destacado">
+        <div class="plan-nombre">Pedidos</div>
+        <div class="plan-que">La carta, y que puedan pedir.</div>
+        <ul>
+          <li>Todo lo de Vitrina</li>
+          <li>Pedidos desde la mesa</li>
+          <li>Horarios por sección</li>
+          <li>Estadísticas</li>
+          <li>QR diseñado</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <div class="plan-nombre">Completo</div>
+        <div class="plan-que">Y la pantalla del local.</div>
+        <ul>
+          <li>Todo lo de Pedidos</li>
+          <li>Cartelera para el televisor</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <div class="plan-nombre">Video</div>
+        <div class="plan-que">Los platos, en movimiento.</div>
+        <ul>
+          <li>Todo lo de Completo</li>
+          <li>Carta en video</li>
+          <li>Video generado con IA</li>
+        </ul>
+      </div>
+    </div>
+    <p style="color:var(--text-dim);font-size:14px">
+      Escríbenos y te decimos cuál te sirve y cuánto cuesta. Sin permanencia.
+    </p>
+  </div>
+</section>
+
+<!-- ══ CIERRE ══ -->
+<section>
+  <div class="envoltura pila">
+    <div class="curso">Empezar</div>
+    <h2>Mándanos tu carta y te la montamos.</h2>
+    <p style="color:var(--text-muted)">
+      Cuéntanos cómo se llama tu restaurante y qué tienes hoy —un PDF, unas fotos,
+      una carta plastificada— y te decimos qué se puede hacer con eso.
+    </p>
+    <div class="acciones">
+      <a class="boton" href="https://wa.me/57XXXXXXXXXX?text=Hola%2C%20quiero%20la%20carta%20digital%20para%20mi%20restaurante">Hablemos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="envoltura pie">
+    <span class="pie-nota">VMenus · Cartas digitales para restaurantes · Colombia</span>
+    <span class="pie-nota"><a href="https://menu.vmenus.co/bonzas">Ver una carta</a></span>
+  </div>
+</footer>
