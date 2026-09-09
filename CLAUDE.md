@@ -72,6 +72,21 @@ Si algún día hay video, **no va aquí**: un MP4 en git es justo lo que la regl
 prohíbe. Ese día se sube a `uploads/` del panel a mano y se enlaza, o se pone en
 Backblaze, que ya está contratado para los respaldos.
 
+## El `index.html` lleva su envoltura, y hay un motivo para insistir
+
+`<!doctype html>`, `<html lang="es">`, `<head>` con `charset` y `viewport`,
+`<body>`. Parece obvio y aun así faltó en el primer despliegue: la página se
+escribió en un previsualizador que **añade esa envoltura al publicar**, y al
+copiarla aquí —donde nginx la sirve tal cual— se quedó sin ella.
+
+Lo que se vio: las tildes salían como `telÃ©fono`, porque sin `<meta charset>`
+el navegador leía los bytes UTF-8 como Latin-1. Lo que **no** se vio y era peor:
+sin `<meta viewport>` la página se dibujaba a ancho de escritorio en los
+móviles, que es por donde entra casi todo el mundo.
+
+Si algún día se rehace la página desde un editor o un previsualizador, **lo
+primero que hay que comprobar al traerla es que siga teniendo el `<head>`**.
+
 ## Antes de publicar
 
 `index.html` trae una franja naranja arriba (`.borrador`) que avisa de lo que
