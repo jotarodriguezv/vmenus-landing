@@ -87,13 +87,14 @@ móviles, que es por donde entra casi todo el mundo.
 Si algún día se rehace la página desde un editor o un previsualizador, **lo
 primero que hay que comprobar al traerla es que siga teniendo el `<head>`**.
 
-## Antes de publicar
+## Publicada
 
-`index.html` trae una franja naranja arriba (`.borrador`) que avisa de lo que
-falta. **Se borra ese `<div>` entero** cuando estén:
+**Hecho el 11/09/2026** (PR #3): el número de WhatsApp real está en los dos
+botones y la franja de borrador (`.borrador`) ya no existe.
 
-- el número de WhatsApp real en los dos botones (hoy `wa.me/57XXXXXXXXXX`);
-- la decisión sobre los precios de los planes.
+Los precios de los planes **no** están en la página: se habla de ellos por
+WhatsApp. Si algún día se publican, es una decisión de negocio aparte, no algo
+que faltara para salir.
 
 ## Comprobar antes de dar por buena una tanda de cambios
 
