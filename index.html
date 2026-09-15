@@ -24,7 +24,7 @@
 <link rel="canonical" href="https://vmenus.co/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
 
 <style>
 /* ══════════════════════════════════════════════════════════════
@@ -50,9 +50,9 @@
   --on-accent: #ffffff;
   --punteado: #dfae80;
 
-  --display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
-  --sans: 'DM Sans', system-ui, sans-serif;
-  --mono: 'Space Mono', ui-monospace, monospace;
+  --display: 'Montserrat', sans-serif;
+  --sans: 'Montserrat', sans-serif;
+  --mono: 'Montserrat', sans-serif;
   --radius: 8px;
   --r-lg: 14px;
   --medida: 62ch;
@@ -75,15 +75,16 @@ body {
 /* ── TIPOGRAFÍA ───────────────────────────────────────────── */
 h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.06; }
 h1 { font-size: clamp(2.5rem, 5.6vw, 4rem); font-weight: 800; letter-spacing: -0.035em; }
-h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; }
-h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 500; letter-spacing: -0.02em; }
+h3 { font-size: 1.05rem; font-weight: 500; letter-spacing: -0.01em; }
 p  { margin: 0; max-width: var(--medida); }
+strong { font-weight: 700; }
 
 /* El rótulo de sección: en una carta impresa es el nombre del curso. */
 .curso {
   font-family: var(--mono);
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-dim);
@@ -114,6 +115,7 @@ section + section { border-top: 1px solid var(--border); }
 .fila-valor {
   font-family: var(--mono);
   font-size: 13px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--text-muted);
   white-space: nowrap;
@@ -126,13 +128,13 @@ section + section { border-top: 1px solid var(--border); }
 .marca {
   font-family: var(--mono);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--accent);
 }
 .entrada { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--text-muted); max-width: 54ch; }
-.entrada strong { color: var(--text); font-weight: 500; }
+.entrada strong { color: var(--text); }
 
 .acciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .boton {
@@ -162,8 +164,8 @@ a:focus-visible, .boton:focus-visible { outline: 2px solid var(--accent); outlin
   gap: 12px; margin-bottom: 10px; padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
-.muestra-titulo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--text-dim); }
-.muestra-url { font-family: var(--mono); font-size: 11px; color: var(--accent); word-break: break-all; }
+.muestra-titulo { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--text-dim); }
+.muestra-url { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--accent); word-break: break-all; }
 .muestra .fila-valor { color: var(--text); }
 
 .doble { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
@@ -174,7 +176,7 @@ a:focus-visible, .boton:focus-visible { outline: 2px solid var(--accent); outlin
 @media (max-width: 620px) { .cifras { grid-template-columns: 1fr; } }
 .cifra { background: var(--surface); padding: 20px 22px; display: flex; flex-direction: column; gap: 4px; }
 .cifra-n { font-family: var(--display); font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.cifra-t { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); }
+.cifra-t { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); }
 
 /* ── PASOS ────────────────────────────────────────────────── */
 /* Numerados porque de verdad es una secuencia: sin el primero no hay
@@ -184,7 +186,7 @@ a:focus-visible, .boton:focus-visible { outline: 2px solid var(--accent); outlin
 .paso { display: flex; flex-direction: column; gap: 8px; counter-increment: paso; }
 .paso::before {
   content: counter(paso, decimal-leading-zero);
-  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
   letter-spacing: 0.14em; color: var(--accent);
 }
 .paso p { font-size: 14.5px; color: var(--text-muted); }
@@ -199,7 +201,7 @@ a:focus-visible, .boton:focus-visible { outline: 2px solid var(--accent); outlin
   display: flex; flex-direction: column; gap: 12px;
 }
 .plan.destacado { border-color: var(--accent); background: var(--accent-dim); }
-.plan-nombre { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.plan-nombre { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 .plan-que { font-size: 14px; color: var(--text-muted); }
 .plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
 .plan li { display: flex; gap: 8px; align-items: baseline; color: var(--text-muted); }
@@ -212,7 +214,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0 56px; }
 .pie { display: flex; flex-wrap: wrap; gap: 18px 32px; justify-content: space-between; align-items: baseline; }
 .pie a { color: var(--accent); text-decoration: none; }
 .pie a:hover { text-decoration: underline; }
-.pie-nota { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+.pie-nota { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-dim); }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -369,7 +371,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0 56px; }
       </p>
       <p style="color:var(--text-muted)">
         Antes de crear nada se revisa en pantalla, se corrige lo que haga falta y
-        se quita lo que sobre. <strong style="color:var(--text);font-weight:500">Nada
+        se quita lo que sobre. <strong style="color:var(--text)">Nada
         entra en tu carta sin que tú lo apruebes.</strong>
       </p>
     </div>
