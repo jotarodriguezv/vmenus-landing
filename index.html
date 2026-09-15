@@ -18,9 +18,8 @@
 <meta property="og:description" content="Un código QR en la mesa abre tu carta con fotos, precios al día y video de los platos. Se actualiza en segundos, sin volver a imprimir.">
 <meta name="twitter:card" content="summary">
 
-<!-- El color de la barra del navegador en el móvil, uno por vista. -->
-<meta name="theme-color" content="#080f0a" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f2f6f3" media="(prefers-color-scheme: light)">
+<!-- El color de la barra del navegador en el móvil. -->
+<meta name="theme-color" content="#ffffff">
 
 <link rel="canonical" href="https://vmenus.co/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,27 +28,27 @@
 
 <style>
 /* ══════════════════════════════════════════════════════════════
-   La paleta es la del propio producto (el panel y la carta ya la
-   usan). Dark-first, igual que ellos: :root es la vista oscura y la
-   clara se redefine encima.
+   Identidad VMenus: blanco como base y naranja como color principal.
+   Los tonos suaves y oscuros son derivados del naranja para conservar
+   jerarquía visual y contraste legible.
    ══════════════════════════════════════════════════════════════ */
 :root {
-  --bg: #080f0a;
-  --surface: #0d150f;
-  --panel: #111a13;
-  --card: #172019;
-  --border: #1e2e21;
-  --border2: #2a3f2d;
-  --accent: #3dd68c;
-  --accent-dim: rgba(61,214,140,0.10);
-  --accent-glow: rgba(61,214,140,0.22);
-  --warn: #ffa502;
-  --warn-dim: rgba(255,165,2,0.12);
-  --text: #ddeee2;
-  --text-muted: #a8bfb0;
-  --text-dim: #7a9182;
-  --on-accent: #080f0a;
-  --punteado: #2a3f2d;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --panel: #fff8f1;
+  --card: #fff1e5;
+  --border: #f2d7bd;
+  --border2: #dfae80;
+  --accent: #e87407;
+  --accent-dim: rgba(232,116,7,0.10);
+  --accent-glow: rgba(232,116,7,0.25);
+  --warn: #e87407;
+  --warn-dim: rgba(232,116,7,0.12);
+  --text: #3b210c;
+  --text-muted: #70421d;
+  --text-dim: #956542;
+  --on-accent: #ffffff;
+  --punteado: #dfae80;
 
   --display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
   --sans: 'DM Sans', system-ui, sans-serif;
@@ -57,45 +56,6 @@
   --radius: 8px;
   --r-lg: 14px;
   --medida: 62ch;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f2f6f3;
-    --surface: #ffffff;
-    --panel: #ffffff;
-    --card: #eef3ef;
-    --border: #dae3dc;
-    --border2: #b9c9bc;
-    --accent: #0b8850;
-    --accent-dim: rgba(11,136,80,0.10);
-    --accent-glow: rgba(11,136,80,0.18);
-    --warn: #96590a;
-    --warn-dim: rgba(150,89,10,0.12);
-    --text: #142017;
-    --text-muted: #4a5c4e;
-    --text-dim: #5d6b60;
-    --on-accent: #ffffff;
-    --punteado: #b9c9bc;
-  }
-}
-:root[data-theme="light"] {
-  --bg: #f2f6f3;
-  --surface: #ffffff;
-  --panel: #ffffff;
-  --card: #eef3ef;
-  --border: #dae3dc;
-  --border2: #b9c9bc;
-  --accent: #0b8850;
-  --accent-dim: rgba(11,136,80,0.10);
-  --accent-glow: rgba(11,136,80,0.18);
-  --warn: #96590a;
-  --warn-dim: rgba(150,89,10,0.12);
-  --text: #142017;
-  --text-muted: #4a5c4e;
-  --text-dim: #5d6b60;
-  --on-accent: #ffffff;
-  --punteado: #b9c9bc;
 }
 
 * { box-sizing: border-box; }
