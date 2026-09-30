@@ -127,6 +127,71 @@ footer .pie>div:first-child .logo{display:flex!important;width:max-content;min-h
 .pedidos-estadisticas div:hover strong{color:#fff0d9;transform:scale(1.08)}
 .pedidos-estadisticas strong{transition:color .22s ease,transform .22s ease}
 @media(prefers-reduced-motion:reduce){.seccion .eyebrow,.personaliza-panel,.editor-titulo,.editor-campo,.editor-accion,.pedidos-estadisticas div,.pedidos-estadisticas strong{transition:none!important}.seccion .eyebrow:hover,.personaliza-panel:hover,.editor-campo:hover,.personaliza-panel:hover .editor-accion,.pedidos-estadisticas div:hover{transform:none!important}}
+/* Jerarquía, transiciones y componentes de conversión. */
+main > .seccion{position:relative;isolation:isolate}
+main > .seccion + .seccion:before{position:absolute;z-index:1;top:0;right:clamp(16px,5vw,88px);left:clamp(16px,5vw,88px);height:1px;background:linear-gradient(90deg,transparent,rgba(111,60,21,.2),transparent);content:''}
+.seccion .encabezado-seccion .eyebrow,.seccion > .contenedor > .eyebrow,.servicio-copia .eyebrow{display:inline-flex!important;width:fit-content;min-height:32px;align-items:center;margin-bottom:15px!important;padding:7px 13px!important;border:1px solid #2d1b0e!important;border-radius:999px!important;background:#2d1b0e!important;color:#fff!important;box-shadow:0 5px 0 rgba(45,27,14,.12)!important;letter-spacing:.1em!important;transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease}
+.seccion .encabezado-seccion .eyebrow:before{display:none!important}
+.seccion .encabezado-seccion .eyebrow:hover,.seccion > .contenedor > .eyebrow:hover,.servicio-copia .eyebrow:hover{background:#56331e!important;box-shadow:0 10px 19px rgba(45,27,14,.24)!important;transform:translateY(-2px) scale(1.025)}
+#producto .encabezado-seccion .eyebrow,.seccion-capacidades .encabezado-seccion .eyebrow{min-height:40px;padding:9px 17px!important;font-size:.78rem!important;letter-spacing:.12em!important;box-shadow:0 7px 0 rgba(45,27,14,.13)!important}
+/* Las funcionalidades de VMenús leen como beneficios claros y táctiles. */
+#producto .lista-check{gap:14px 18px}
+#producto .lista-check li{min-height:54px;align-items:center;padding:12px 15px;border:1px solid #2d1b0e;border-radius:999px;background:#2d1b0e;color:#fff;box-shadow:0 7px 0 rgba(45,27,14,.11);font-weight:600;transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease}
+#producto .lista-check li:before{flex:0 0 23px;width:23px;height:23px;background:#e87407;color:#fff;box-shadow:0 4px 9px rgba(232,116,7,.27);font-size:.78rem}
+#producto .lista-check li:hover{background:#56331e;box-shadow:0 13px 23px rgba(45,27,14,.22);transform:translateY(-3px)}
+/* La cartelera TV se siente como un bloque de producto completo. */
+.seccion:has(.proximamente){overflow:hidden;background:#2d1b0e!important;color:#fff}
+.seccion:has(.proximamente):before{display:none!important}
+.seccion:has(.proximamente) .proximamente{width:min(1160px,calc(100% - 40px));margin:auto;padding:clamp(54px,7vw,86px) 0;border-radius:0;background:transparent}
+.seccion:has(.proximamente) .proximamente ul{color:#f7d7bb}
+.seccion:has(.proximamente) .proximamente li::marker{color:#ffac62}
+.seccion:has(.proximamente) .proxima-ilustracion{background:rgba(255,255,255,.06)}
+/* Checkpoints de prueba social con respuesta visual al cursor. */
+.beneficios-clientes li:before{transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease}
+.beneficios-clientes li:hover:before{background:#ff9a3e;box-shadow:0 0 0 5px rgba(232,116,7,.18),0 8px 16px rgba(232,116,7,.3);transform:scale(1.14)}
+/* Editor demostrativo: texto siempre contenido, incluso en móvil. */
+.personaliza-panel{max-width:510px!important}
+.editor-titulo{min-height:42px!important;padding:10px 16px!important;font-size:.84rem!important}
+.editor-campos{gap:10px!important}
+.editor-campo{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);min-height:50px!important;padding:11px 14px!important}
+.editor-campo span,.editor-campo b{min-width:0;overflow-wrap:anywhere}
+.editor-campo b{text-align:right;font-size:.73rem;line-height:1.25}
+.editor-campo:has(.editor-switch){grid-template-columns:1fr auto}
+@media(max-width:620px){main > .seccion + .seccion:before{right:16px;left:16px}.seccion:has(.proximamente) .proximamente{width:min(100% - 32px,1160px);padding:60px 0}.seccion:has(.proximamente) .proxima-ilustracion{min-height:230px}.editor-titulo{padding:9px 13px!important;font-size:.75rem!important}.editor-campo{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);padding:10px 11px!important;font-size:.64rem}.editor-campo b{font-size:.67rem}#producto .lista-check{grid-template-columns:1fr;gap:10px}#producto .lista-check li{min-height:50px;border-radius:17px;font-size:.78rem}}
+/* Beneficios consistentes: píldoras oscuras con el check de Clientes reales. */
+.proximamente ul,.servicio-copia ul,.plan ul{list-style:none!important}
+.proximamente li,.servicio-copia li,.plan li{display:flex!important;min-height:42px;align-items:center;gap:10px;padding:9px 12px!important;border:1px solid #2d1b0e;border-radius:999px;background:#2d1b0e!important;color:#fff!important;box-shadow:0 6px 0 rgba(45,27,14,.11);font-size:.76rem!important;line-height:1.35;transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease}
+.proximamente li:before,.servicio-copia li:before,.plan li:before{display:grid!important;flex:0 0 22px;width:22px;height:22px;margin:0!important;place-items:center;border-radius:50%;background:#e87407;color:#fff!important;box-shadow:0 4px 9px rgba(232,116,7,.28);content:'✓'!important;font-size:.72rem;font-weight:800}
+.proximamente li:hover,.servicio-copia li:hover,.plan li:hover{background:#56331e!important;box-shadow:0 13px 23px rgba(45,27,14,.22);transform:translateY(-3px) scale(1.01)}
+/* El título de TV actúa como una promesa comercial y la nota valida el ejemplo. */
+.proximamente .eyebrow{display:inline-flex!important;width:fit-content;min-height:40px;align-items:center;padding:9px 16px!important;border:1px solid #ffb36d!important;border-radius:999px!important;background:#e87407!important;color:#fff!important;box-shadow:0 8px 0 rgba(0,0,0,.16);font-size:.8rem!important;font-weight:800!important;letter-spacing:.02em!important;text-transform:none!important;transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease}
+.proximamente .eyebrow:hover{background:#bd5700!important;box-shadow:0 13px 21px rgba(0,0,0,.24);transform:translateY(-2px) scale(1.02)}
+.proxima-ilustracion{position:relative!important;padding-bottom:52px!important}
+.tv-caption{position:absolute;right:15px;bottom:14px;left:15px;margin:0!important;color:#f7d7bb!important;font-size:.62rem!important;line-height:1.35;text-align:center}
+/* El campo de producto separa etiqueta, ayuda y valor. */
+.editor-campo-producto{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)!important;align-items:center!important}
+.editor-etiqueta{display:grid;min-width:0;gap:2px}
+.editor-etiqueta span{display:block!important;width:auto!important;height:auto!important;background:transparent!important;color:#593a25!important;font-size:.65rem!important;font-weight:700!important}
+.editor-etiqueta small{color:#9d7659;font-size:.56rem;line-height:1.2}
+.editor-campo-producto b{padding:7px 9px;border-radius:8px;background:#fff;color:#2d1b0e;box-shadow:inset 0 0 0 1px #f3d6bb;font-size:.68rem!important}
+.editor-disponible{display:inline-flex!important;width:max-content!important;height:auto!important;align-items:center;gap:5px;padding:6px 9px!important;border:1px solid #1d8046;border-radius:999px!important;background:#238a4d!important;color:#fff!important;font-size:.63rem!important;line-height:1!important;box-shadow:0 4px 9px rgba(35,138,77,.2)}
+.editor-disponible:before{content:'✓';font-size:.67rem;font-weight:800}
+/* Planes: dos propuestas claras, equilibradas y listas para convertir. */
+#planes .encabezado-seccion .eyebrow{min-height:42px;padding:10px 17px!important;background:#e87407!important;border-color:#e87407!important;color:#fff!important;font-size:.78rem!important;box-shadow:0 8px 0 rgba(184,87,0,.15)!important}
+#planes .encabezado-seccion .eyebrow:hover{background:#bd5700!important}
+#planes .planes{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:900px;margin:0 auto}
+#planes .plan{position:relative;min-height:470px;padding:31px;border:1px solid #e4b17d;border-radius:26px;background:linear-gradient(145deg,#fff,#fff8f2);box-shadow:0 14px 30px rgba(120,64,19,.1);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+#planes .plan:before{position:absolute;top:0;right:25px;left:25px;height:5px;border-radius:0 0 8px 8px;background:linear-gradient(90deg,#e87407,#ffb36d);content:''}
+#planes .plan.recomendado{border:2px solid #2d1b0e;background:linear-gradient(145deg,#fff8f1,#ffead6);box-shadow:0 20px 38px rgba(45,27,14,.16)}
+#planes .plan:hover{border-color:#e87407;box-shadow:0 25px 42px rgba(120,64,19,.18);transform:translateY(-7px)}
+#planes .plan .etiqueta{width:max-content;margin-bottom:17px;padding:7px 10px;border:1px solid #e87407;border-radius:999px;background:#fff0e2;color:#a94100;font-size:.63rem;font-weight:800}
+#planes .plan h3{margin-bottom:10px;font-size:1.55rem;font-weight:800}
+#planes .plan>p:first-of-type{min-height:52px;color:#593a25;font-size:.84rem}
+#planes .plan .precio{margin:20px 0 22px;color:#2d1b0e;font-size:1.38rem;font-weight:800;letter-spacing:-.03em}
+#planes .plan .precio small{margin-top:5px;color:#785e49;font-size:.68rem;line-height:1.4}
+#planes .plan .boton{border-radius:999px}
+#planes .nota-placeholder{display:none}
+@media(max-width:620px){.proximamente li,.servicio-copia li,.plan li{align-items:flex-start;border-radius:16px;font-size:.73rem!important}.proximamente li:before,.servicio-copia li:before,.plan li:before{margin-top:1px!important}.proximamente .eyebrow{font-size:.71rem!important}#planes .planes{grid-template-columns:1fr;gap:16px}#planes .plan{min-height:0;padding:26px 20px}.editor-campo-producto{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}}
 </style>
 <header class="barra en-hero"><nav class="contenedor nav" aria-label="Navegación principal"><a class="logo" href="#inicio"><img src="imagenes/vmenus-logo-v1.png" width="33" height="33" alt="Logo VMenús">VMenús</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú de navegación">☰</button><div class="nav-enlaces" id="menu-principal"><a href="#producto">Producto</a><a href="#como-funciona">Cómo funciona</a><a href="#planes">Planes</a><a href="recursos/">Recursos</a><a class="acceso-restaurante" href="https://adminvmenus.verificame.click/" target="_blank" rel="noopener noreferrer">Ingresa como restaurante</a></div><a class="boton" href="https://wa.me/573151182283?text=Hola%2C%20quiero%20conocer%20VMenús">Quiero mi menú</a></nav></header>
 <main>
@@ -175,13 +240,22 @@ if (panelPersonalizacion) {
 }
 if (panelPersonalizacion) {
   panelPersonalizacion.setAttribute('aria-label', 'Demostración visual de personalización de menú');
-  panelPersonalizacion.innerHTML = '<span aria-hidden="true">✦</span><div class="editor-cabecera"><span class="editor-titulo">Personaliza tu menú</span><i class="editor-pincel" aria-hidden="true">🖌</i></div><div class="editor-campos"><div class="editor-campo"><span>Nombre del producto</span><b>Hamburguesa artesanal</b></div><div class="editor-campo"><span>Categoría</span><b>Hamburguesas</b></div><div class="editor-campo"><span>Precio</span><b>$ 24.900</b></div><div class="editor-campo"><span class="editor-disponible">Disponible</span><i class="editor-switch editor-switch--available" aria-label="Producto disponible"></i></div><div class="editor-campo"><span>Activar promoción</span><i class="editor-switch" aria-label="Promoción activada"></i></div></div><div class="editor-accion" aria-hidden="true"><b>+</b> Agregar nuevo plato</div><div class="editor-tags"><span>Color de marca</span><span>Fotos</span><span>Tipografía</span></div>';
+  panelPersonalizacion.innerHTML = '<span aria-hidden="true">✦</span><div class="editor-cabecera"><span class="editor-titulo">Personaliza tu menú</span><i class="editor-pincel" aria-hidden="true">🖌</i></div><div class="editor-campos"><div class="editor-campo editor-campo-producto"><div class="editor-etiqueta"><span>Nombre de tu producto</span><small>Campo de ejemplo</small></div><b>Hamburguesa artesanal</b></div><div class="editor-campo"><span>Categoría</span><b>Hamburguesas</b></div><div class="editor-campo"><span>Precio</span><b>$ 24.900</b></div><div class="editor-campo"><span class="editor-disponible">Disponible</span><i class="editor-switch editor-switch--available" aria-label="Producto disponible"></i></div><div class="editor-campo"><span>Activar promoción</span><i class="editor-switch" aria-label="Promoción activada"></i></div></div><div class="editor-accion" aria-hidden="true"><b>+</b> Agregar nuevo plato</div><div class="editor-tags"><span>Color de marca</span><span>Fotos</span><span>Tipografía</span></div>';
 }
 const bloquesServicio = document.querySelectorAll('.servicio-visual .servicio-copia');
 if (bloquesServicio.length >= 3) {
   bloquesServicio[0].querySelector('p:not(.eyebrow)').innerHTML = 'Dale movimiento a tu menú con videos cortos en formato reel. Convertimos fotos estáticas en <strong>contenido visual que llama la atención, genera antojo y ayuda a vender</strong>.';
   bloquesServicio[1].querySelector('p:not(.eyebrow)').innerHTML = 'Personaliza fuentes, colores, imágenes, videos y diseño para lograr una experiencia <strong>fiel a la identidad de tu restaurante</strong>.';
   bloquesServicio[2].querySelector('p:not(.eyebrow)').innerHTML = 'Activa el carrito para recibir pedidos desde tu menú. <strong>Cada interacción te muestra qué productos atraen más interés y oportunidades de crecimiento.</strong>';
+  bloquesServicio[1].querySelector('h2').style.fontWeight = '600';
+  bloquesServicio[1].querySelector('h2').style.fontSize = 'clamp(2.25rem, 4vw, 3.7rem)';
+}
+const seccionPlanes = document.querySelector('#planes');
+if (seccionPlanes) {
+  seccionPlanes.querySelector('.eyebrow').textContent = 'Planes VMenús';
+  seccionPlanes.querySelector('h2').textContent = 'Elige el plan que hará que tu menú venda mejor.';
+  seccionPlanes.querySelector('.texto-grande').textContent = 'Dos formas claras de darle a tu restaurante una presencia digital más profesional.';
+  seccionPlanes.querySelector('.planes').innerHTML = `<article class="plan"><span class="etiqueta">Para empezar</span><h3>Plan Digital</h3><p>Todo lo necesario para presentar tu carta de forma profesional, clara y fácil de compartir.</p><p class="precio">Propuesta personalizada<small>Cuéntanos qué necesita tu restaurante y recibe una cotización a tu medida.</small></p><ul><li>Menú QR listo para compartir</li><li>Productos, fotos y categorías</li><li>Precios siempre actualizables</li><li>Diseño alineado con tu marca</li></ul><a class="boton boton-secundario" href="https://wa.me/573151182283?text=Hola%2C%20quiero%20conocer%20el%20Plan%20Digital%20de%20VMenús">Quiero este plan</a></article><article class="plan recomendado"><span class="etiqueta">Experiencia completa</span><h3>Plan Experiencia</h3><p>Para restaurantes que quieren llevar su menú más lejos con recursos visuales que convierten miradas en antojo.</p><p class="precio">Propuesta personalizada<small>Incluye una recomendación según tus objetivos, carta y espacio físico.</small></p><ul><li>Todo lo del Plan Digital</li><li>Contenido visual para destacar platos</li><li>Opciones de cartelera para TV</li><li>Acompañamiento de personalización</li></ul><a class="boton" href="https://wa.me/573151182283?text=Hola%2C%20quiero%20conocer%20el%20Plan%20Experiencia%20de%20VMenús">Quiero potenciar mi menú</a></article>`;
 }
 const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
 const textNodes = []; while (textWalker.nextNode()) textNodes.push(textWalker.currentNode);
@@ -190,16 +264,33 @@ document.querySelectorAll('[alt], [title]').forEach((element) => { ['alt', 'titl
 document.querySelector('.hero-copy .texto-grande').innerHTML = 'VMenús convierte tu menú en una <strong>experiencia digital clara, actualizable y lista para vender</strong> desde el celular de tus clientes.';
 document.querySelector('#producto .texto-grande').innerHTML = 'Una carta impresa se queda corta cuando cambian <strong>precios, platos o promociones</strong>. Con VMenús tu restaurante tiene una <strong>carta digital siempre al día</strong> y adaptada a tu identidad.';
 document.querySelector('.proximamente p:not(.eyebrow)').innerHTML = 'Creamos carteleras digitales para televisores que convierten tus <strong>productos, precios y promociones</strong> en una imagen moderna, clara y <strong>lista para vender</strong>.';
-document.querySelector('.capacidades').closest('.seccion').querySelector('h2').textContent = 'Todo lo que VMenús hace por tu restaurante';
+const respuestasFaq = [
+  'VMenús es una <strong>carta digital para restaurantes</strong>. Tus clientes acceden a ella con un <strong>código QR</strong> desde su celular.',
+  'No. La carta se abre directamente en el <strong>navegador del celular</strong> después de escanear el QR.',
+  'Sí. Puedes <strong>actualizar productos y precios</strong> cuando sea necesario, sin reimprimir tu menú.',
+  'Sí. VMenús puede adaptarse a los <strong>colores, logo, fotografías y estilo visual</strong> de tu restaurante.',
+  'Sí. Puedes usar una cartelera para <strong>mostrar platos y promociones</strong> en el televisor del local, según el plan.',
+  'Escríbenos por WhatsApp. Te orientamos para <strong>montar tu carta</strong> y elegir la experiencia adecuada para tu restaurante.'
+];
+document.querySelectorAll('.faq details p').forEach((respuesta, indice) => { if (respuestasFaq[indice]) respuesta.innerHTML = respuestasFaq[indice]; });
+seccionSoluciones.classList.add('seccion-capacidades');
+seccionSoluciones.querySelector('.eyebrow').textContent = 'Todo lo que tu menú puede hacer';
+seccionSoluciones.querySelector('h2').textContent = 'Todo lo que VMenús hace por tu restaurante';
 document.querySelector('#producto .capacidades')?.insertAdjacentHTML('afterend', `<div class="enlaces-servicios" aria-label="Servicios especializados de VMenús"><a class="enlace-servicio" href="menu-estatico/"><span>Con fotografías</span><strong>Menú Estático ↗</strong></a><a class="enlace-servicio" href="menu-reels/"><span>Con video vertical</span><strong>Menú Reels ↗</strong></a><a class="enlace-servicio" href="cartelera-tv/"><span>Para tu restaurante</span><strong>Cartelera TV ↗</strong></a></div>`);
 document.querySelector('#como-funciona').insertAdjacentHTML('beforebegin', `<section class="seccion clientes" id="clientes"><div class="contenedor"><p class="eyebrow">Clientes reales</p><h2>Restaurantes reales que ya venden con VMenús</h2><p class="texto-grande">Así se ven los menús digitales que hoy usan nuestros clientes para recibir más pedidos y vender mejor.</p><div class="clientes-grid"><div class="clientes-telefonos"><div class="cliente-real"><article class="telefono-cliente" aria-label="Menú real de Bonzas"><figure><img src="imagenes/bonzas-menu-v1.webp" width="480" height="13882" alt="Menú completo de Bonzas"></figure></article><a class="cliente-identidad" href="https://www.instagram.com/bonzasburgergrill" target="_blank" rel="noopener noreferrer"><small>Menú real</small><strong>Bonzas Burger Grill · San Gil</strong></a></div><div class="cliente-real"><article class="telefono-cliente" aria-label="Menú real de Malparados"><figure><img src="imagenes/malparados-menu-v1.webp" width="480" height="6949" alt="Menú completo de Malparados"></figure></article><a class="cliente-identidad" href="https://www.instagram.com/hamburgueseriamalparadosbar/" target="_blank" rel="noopener noreferrer"><small>Menú real</small><strong>Malparados · San Gil</strong></a></div></div><div class="beneficios-clientes"><h3>Un menú que abre el apetito y vende por ti</h3><ul><li><span><strong>Fotos que hacen antojar.</strong>Cada producto se muestra con imagen, precio y descripción para decidir más rápido.</span></li><li><span><strong>Siempre actualizado.</strong>Cambia productos, precios o disponibilidad sin depender de un diseñador.</span></li><li><span><strong>Más pedidos, menos fricción.</strong>Tus clientes encuentran lo que buscan y piden desde su celular.</span></li><li><span><strong>Tu marca se ve profesional.</strong>Un menú digital diseñado para reflejar la personalidad de tu restaurante.</span></li><li><span><strong>Funciona desde cualquier lugar.</strong>Comparte tu menú mediante QR, redes sociales o WhatsApp.</span></li></ul><a class="boton" href="https://wa.me/573151182283?text=Hola%2C%20quiero%20un%20men%C3%BA%20como%20estos">Quiero un menú como estos</a></div></div></div></section>`);
 document.querySelector('.whatsapp-flotante').innerHTML = '<img src="imagenes/whatsapp-v2.webp" width="160" height="160" alt="">';
-// Recorrido de venta: prueba social, menú TV, contenido visual, personalización y datos.
+// Recorrido de venta: prueba social, menú TV, proceso, contenido, personalización y datos.
 const seccionClientes = document.querySelector('#clientes');
 const seccionTv = document.querySelector('.proximamente')?.closest('.seccion');
+const seccionComoFunciona = document.querySelector('#como-funciona');
 const seccionesServicio = [...document.querySelectorAll('.servicio-visual')].map((servicio) => servicio.closest('.seccion'));
-if (seccionSoluciones && seccionClientes && seccionTv && seccionesServicio.length === 3) {
-  seccionSoluciones.after(seccionClientes, seccionTv, ...seccionesServicio);
+if (seccionTv) {
+  seccionTv.querySelector('.eyebrow').textContent = 'Tu menú también vende desde la pantalla.';
+  const ilustracionTv = seccionTv.querySelector('.proxima-ilustracion');
+  if (ilustracionTv && !ilustracionTv.querySelector('.tv-caption')) ilustracionTv.insertAdjacentHTML('beforeend', '<p class="tv-caption">Ejemplo de pantalla utilizada por un cliente real.</p>');
+}
+if (seccionSoluciones && seccionClientes && seccionTv && seccionComoFunciona && seccionesServicio.length === 3) {
+  seccionSoluciones.after(seccionClientes, seccionTv, seccionComoFunciona, ...seccionesServicio);
 }
 const footerContact = document.querySelector('.pie > div:last-child'); footerContact.insertAdjacentHTML('beforeend', '<div class="sociales"><a href="https://www.instagram.com/vmenusco" target="_blank" rel="noopener noreferrer" aria-label="Instagram de VMenús"><img src="imagenes/instagram-v1.webp" width="405" height="405" alt=""></a><a href="https://www.tiktok.com/@vmenusco" target="_blank" rel="noopener noreferrer" aria-label="TikTok de VMenús"><img src="imagenes/tiktok-v1.webp" width="372" height="428" alt=""></a></div>');
 const barra = document.querySelector('.barra');
