@@ -106,6 +106,27 @@ footer .pie>div:first-child .logo{display:flex!important;width:max-content;min-h
 .barra.en-hero{border-bottom-color:transparent;box-shadow:none}
 .hero{padding-bottom:82px;background:#e87407}
 .hero:after{display:none}
+/* Etiquetas de sección: un sistema visual único y accesible. */
+.seccion .eyebrow{display:inline-flex;align-items:center;min-height:30px;padding:6px 12px;border:1px solid #2d1b0e;border-radius:999px;background:#2d1b0e;color:#fff;box-shadow:0 5px 0 rgba(45,27,14,.12);letter-spacing:.1em;transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease}
+.seccion .eyebrow:hover{background:#56331e;box-shadow:0 9px 18px rgba(45,27,14,.23);transform:translateY(-2px) scale(1.025)}
+.seccion .eyebrow:focus-visible{outline:3px solid rgba(232,116,7,.42);outline-offset:3px}
+/* Panel demostrativo de personalización y tarjetas de datos. */
+.personaliza-panel{border:1px solid #e8b071!important;background:linear-gradient(145deg,#fff,#fff7f0)!important;box-shadow:0 18px 34px rgba(120,64,19,.13)!important;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.personaliza-panel:hover{border-color:#e87407!important;box-shadow:0 24px 40px rgba(120,64,19,.2)!important;transform:translateY(-5px)}
+.editor-cabecera{justify-content:space-between!important;padding-right:46px!important}
+.editor-titulo{display:inline-flex!important;width:auto!important;height:auto!important;align-items:center;padding:8px 12px!important;border-radius:999px!important;background:#e87407!important;color:#fff!important;font-size:.69rem!important;font-weight:800!important;letter-spacing:.01em;box-shadow:0 7px 14px rgba(184,87,0,.2);transition:transform .2s ease,background-color .2s ease}
+.personaliza-panel:hover .editor-titulo{background:#bd5700!important;transform:scale(1.035)}
+.editor-campo{min-height:45px;transition:transform .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+.editor-campo:hover{border-color:#e87407;background:#fff;box-shadow:0 7px 14px rgba(120,64,19,.09);transform:translateX(3px)}
+.editor-disponible{color:#268449!important;font-weight:800}
+.editor-switch--available{background:#23a35a!important}
+.editor-accion{cursor:default;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+.personaliza-panel:hover .editor-accion{background:#4b2b19;box-shadow:0 9px 16px rgba(45,27,14,.18);transform:translateY(-1px)}
+.pedidos-estadisticas div{cursor:default;transition:transform .22s ease,background-color .22s ease,box-shadow .22s ease}
+.pedidos-estadisticas div:hover{background:rgba(255,188,122,.22);box-shadow:0 10px 16px rgba(0,0,0,.2);transform:translateY(-5px) scale(1.035)}
+.pedidos-estadisticas div:hover strong{color:#fff0d9;transform:scale(1.08)}
+.pedidos-estadisticas strong{transition:color .22s ease,transform .22s ease}
+@media(prefers-reduced-motion:reduce){.seccion .eyebrow,.personaliza-panel,.editor-titulo,.editor-campo,.editor-accion,.pedidos-estadisticas div,.pedidos-estadisticas strong{transition:none!important}.seccion .eyebrow:hover,.personaliza-panel:hover,.editor-campo:hover,.personaliza-panel:hover .editor-accion,.pedidos-estadisticas div:hover{transform:none!important}}
 </style>
 <header class="barra en-hero"><nav class="contenedor nav" aria-label="Navegación principal"><a class="logo" href="#inicio"><img src="imagenes/vmenus-logo-v1.png" width="33" height="33" alt="Logo VMenús">VMenús</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú de navegación">☰</button><div class="nav-enlaces" id="menu-principal"><a href="#producto">Producto</a><a href="#como-funciona">Cómo funciona</a><a href="#planes">Planes</a><a href="recursos/">Recursos</a><a class="acceso-restaurante" href="https://adminvmenus.verificame.click/" target="_blank" rel="noopener noreferrer">Ingresa como restaurante</a></div><a class="boton" href="https://wa.me/573151182283?text=Hola%2C%20quiero%20conocer%20VMenús">Quiero mi menú</a></nav></header>
 <main>
@@ -152,14 +173,34 @@ const panelPersonalizacion = document.querySelector('.personaliza-panel');
 if (panelPersonalizacion) {
   panelPersonalizacion.innerHTML = '<span aria-hidden="true">✦</span><div class="editor-cabecera"><i class="editor-pincel" aria-hidden="true">🖌</i><strong>Personaliza tu menú</strong></div><div class="editor-campos"><div class="editor-campo"><span>Nombre del producto</span><b>Hamburguesa artesanal</b></div><div class="editor-campo"><span>Precio</span><b>$ 24.900</b></div><div class="editor-campo"><span>Activar promoción</span><i class="editor-switch" aria-label="Promoción activada"></i></div></div><button class="editor-accion" type="button"><b>+</b> Agregar nuevo plato</button><div class="editor-tags"><span>Color de marca</span><span>Fotos</span><span>Tipografía</span></div>';
 }
+if (panelPersonalizacion) {
+  panelPersonalizacion.setAttribute('aria-label', 'Demostración visual de personalización de menú');
+  panelPersonalizacion.innerHTML = '<span aria-hidden="true">✦</span><div class="editor-cabecera"><span class="editor-titulo">Personaliza tu menú</span><i class="editor-pincel" aria-hidden="true">🖌</i></div><div class="editor-campos"><div class="editor-campo"><span>Nombre del producto</span><b>Hamburguesa artesanal</b></div><div class="editor-campo"><span>Categoría</span><b>Hamburguesas</b></div><div class="editor-campo"><span>Precio</span><b>$ 24.900</b></div><div class="editor-campo"><span class="editor-disponible">Disponible</span><i class="editor-switch editor-switch--available" aria-label="Producto disponible"></i></div><div class="editor-campo"><span>Activar promoción</span><i class="editor-switch" aria-label="Promoción activada"></i></div></div><div class="editor-accion" aria-hidden="true"><b>+</b> Agregar nuevo plato</div><div class="editor-tags"><span>Color de marca</span><span>Fotos</span><span>Tipografía</span></div>';
+}
+const bloquesServicio = document.querySelectorAll('.servicio-visual .servicio-copia');
+if (bloquesServicio.length >= 3) {
+  bloquesServicio[0].querySelector('p:not(.eyebrow)').innerHTML = 'Dale movimiento a tu menú con videos cortos en formato reel. Convertimos fotos estáticas en <strong>contenido visual que llama la atención, genera antojo y ayuda a vender</strong>.';
+  bloquesServicio[1].querySelector('p:not(.eyebrow)').innerHTML = 'Personaliza fuentes, colores, imágenes, videos y diseño para lograr una experiencia <strong>fiel a la identidad de tu restaurante</strong>.';
+  bloquesServicio[2].querySelector('p:not(.eyebrow)').innerHTML = 'Activa el carrito para recibir pedidos desde tu menú. <strong>Cada interacción te muestra qué productos atraen más interés y oportunidades de crecimiento.</strong>';
+}
 const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
 const textNodes = []; while (textWalker.nextNode()) textNodes.push(textWalker.currentNode);
 textNodes.forEach((node) => { node.nodeValue = node.nodeValue.replaceAll('VMenus', 'VMenús'); });
 document.querySelectorAll('[alt], [title]').forEach((element) => { ['alt', 'title'].forEach((attribute) => { if (element.hasAttribute(attribute)) element.setAttribute(attribute, element.getAttribute(attribute).replaceAll('VMenus', 'VMenús')); }); });
+document.querySelector('.hero-copy .texto-grande').innerHTML = 'VMenús convierte tu menú en una <strong>experiencia digital clara, actualizable y lista para vender</strong> desde el celular de tus clientes.';
+document.querySelector('#producto .texto-grande').innerHTML = 'Una carta impresa se queda corta cuando cambian <strong>precios, platos o promociones</strong>. Con VMenús tu restaurante tiene una <strong>carta digital siempre al día</strong> y adaptada a tu identidad.';
+document.querySelector('.proximamente p:not(.eyebrow)').innerHTML = 'Creamos carteleras digitales para televisores que convierten tus <strong>productos, precios y promociones</strong> en una imagen moderna, clara y <strong>lista para vender</strong>.';
 document.querySelector('.capacidades').closest('.seccion').querySelector('h2').textContent = 'Todo lo que VMenús hace por tu restaurante';
 document.querySelector('#producto .capacidades')?.insertAdjacentHTML('afterend', `<div class="enlaces-servicios" aria-label="Servicios especializados de VMenús"><a class="enlace-servicio" href="menu-estatico/"><span>Con fotografías</span><strong>Menú Estático ↗</strong></a><a class="enlace-servicio" href="menu-reels/"><span>Con video vertical</span><strong>Menú Reels ↗</strong></a><a class="enlace-servicio" href="cartelera-tv/"><span>Para tu restaurante</span><strong>Cartelera TV ↗</strong></a></div>`);
 document.querySelector('#como-funciona').insertAdjacentHTML('beforebegin', `<section class="seccion clientes" id="clientes"><div class="contenedor"><p class="eyebrow">Clientes reales</p><h2>Restaurantes reales que ya venden con VMenús</h2><p class="texto-grande">Así se ven los menús digitales que hoy usan nuestros clientes para recibir más pedidos y vender mejor.</p><div class="clientes-grid"><div class="clientes-telefonos"><div class="cliente-real"><article class="telefono-cliente" aria-label="Menú real de Bonzas"><figure><img src="imagenes/bonzas-menu-v1.webp" width="480" height="13882" alt="Menú completo de Bonzas"></figure></article><a class="cliente-identidad" href="https://www.instagram.com/bonzasburgergrill" target="_blank" rel="noopener noreferrer"><small>Menú real</small><strong>Bonzas Burger Grill · San Gil</strong></a></div><div class="cliente-real"><article class="telefono-cliente" aria-label="Menú real de Malparados"><figure><img src="imagenes/malparados-menu-v1.webp" width="480" height="6949" alt="Menú completo de Malparados"></figure></article><a class="cliente-identidad" href="https://www.instagram.com/hamburgueseriamalparadosbar/" target="_blank" rel="noopener noreferrer"><small>Menú real</small><strong>Malparados · San Gil</strong></a></div></div><div class="beneficios-clientes"><h3>Un menú que abre el apetito y vende por ti</h3><ul><li><span><strong>Fotos que hacen antojar.</strong>Cada producto se muestra con imagen, precio y descripción para decidir más rápido.</span></li><li><span><strong>Siempre actualizado.</strong>Cambia productos, precios o disponibilidad sin depender de un diseñador.</span></li><li><span><strong>Más pedidos, menos fricción.</strong>Tus clientes encuentran lo que buscan y piden desde su celular.</span></li><li><span><strong>Tu marca se ve profesional.</strong>Un menú digital diseñado para reflejar la personalidad de tu restaurante.</span></li><li><span><strong>Funciona desde cualquier lugar.</strong>Comparte tu menú mediante QR, redes sociales o WhatsApp.</span></li></ul><a class="boton" href="https://wa.me/573151182283?text=Hola%2C%20quiero%20un%20men%C3%BA%20como%20estos">Quiero un menú como estos</a></div></div></div></section>`);
 document.querySelector('.whatsapp-flotante').innerHTML = '<img src="imagenes/whatsapp-v2.webp" width="160" height="160" alt="">';
+// Recorrido de venta: prueba social, menú TV, contenido visual, personalización y datos.
+const seccionClientes = document.querySelector('#clientes');
+const seccionTv = document.querySelector('.proximamente')?.closest('.seccion');
+const seccionesServicio = [...document.querySelectorAll('.servicio-visual')].map((servicio) => servicio.closest('.seccion'));
+if (seccionSoluciones && seccionClientes && seccionTv && seccionesServicio.length === 3) {
+  seccionSoluciones.after(seccionClientes, seccionTv, ...seccionesServicio);
+}
 const footerContact = document.querySelector('.pie > div:last-child'); footerContact.insertAdjacentHTML('beforeend', '<div class="sociales"><a href="https://www.instagram.com/vmenusco" target="_blank" rel="noopener noreferrer" aria-label="Instagram de VMenús"><img src="imagenes/instagram-v1.webp" width="405" height="405" alt=""></a><a href="https://www.tiktok.com/@vmenusco" target="_blank" rel="noopener noreferrer" aria-label="TikTok de VMenús"><img src="imagenes/tiktok-v1.webp" width="372" height="428" alt=""></a></div>');
 const barra = document.querySelector('.barra');
 const hero = document.querySelector('.hero');
