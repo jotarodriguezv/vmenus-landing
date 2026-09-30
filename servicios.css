@@ -12,3 +12,10 @@
 @media(max-width:900px){.nav-acciones{display:none}.nav-enlaces a.acceso-movil{display:block}}
 /* Entre 901 y 1060 px no caben los cinco enlaces y los dos botones con los espaciados normales. */
 @media(min-width:901px) and (max-width:1060px){.barra .nav-enlaces{gap:2px}.barra .nav-enlaces a{padding:8px 9px}.nav-acciones{gap:6px}.barra .nav .nav-acciones .boton{padding:10px 12px;font-size:.66rem}}
+
+/* ── DEMO EN VIVO ──────────────────────────────────────────
+   Botón de contorno blanco junto al principal, en la portada y en el cierre de
+   cada página de servicio (ambas sobre naranja). */
+.botones-servicio{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.hero .boton.boton-demo,.cierre .boton.boton-demo{border-color:rgba(255,255,255,.8);background:transparent;color:#fff;box-shadow:none}
+.hero .boton.boton-demo:hover,.hero .boton.boton-demo:focus-visible,.cierre .boton.boton-demo:hover,.cierre .boton.boton-demo:focus-visible{background:#fff;color:var(--naranja-oscuro)}
